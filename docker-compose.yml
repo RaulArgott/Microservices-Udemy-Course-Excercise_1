@@ -5,6 +5,8 @@ services:
     build: ./client
     image: client-service:udemy-1
     container_name: client-service-container
+    environment:
+      - WATCHPACK_POLLING=true
     ports:
       - "3000:3000"
     volumes:
