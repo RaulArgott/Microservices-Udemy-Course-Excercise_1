@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  client-service:
+    build: ./client
+    image: client-service:udemy-1
+    container_name: client-service-container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/src:/app/src
+    networks:
+      - app-network
+
+  comments-service:
+    build: ./comments
+    image: comments-service:udemy-1
+    container_name: comments-service-container
+    ports:
+      - "4001:4001"
+    networks:
+      - app-network
+
+  posts-service:
+    build: ./posts
+    image: posts-service:udemy-1
+    container_name: posts-service-container
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    name: app-network

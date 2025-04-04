@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 4001
 
 # Define startup command
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
