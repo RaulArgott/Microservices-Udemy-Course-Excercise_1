@@ -9,7 +9,7 @@ const CommentList = ({ postId }) => {
         setComments(res.data);
     };
 
-    useEffect(() => {
+    useEffect(async() => {
         fetchComments();
     }, []);
 

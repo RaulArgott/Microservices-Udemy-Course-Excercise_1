@@ -18,19 +18,53 @@ services:
     build: ./comments
     image: comments-service:udemy-1
     container_name: comments-service-container
+    environment:
+      - WATCHPACK_POLLING=true
     ports:
       - "4001:4001"
     networks:
       - app-network
+    volumes:
+      - ./comments/index.js:/app/index.js
 
   posts-service:
     build: ./posts
     image: posts-service:udemy-1
     container_name: posts-service-container
+    environment:
+      - WATCHPACK_POLLING=true
     ports:
       - "4000:4000"
     networks:
       - app-network
+    volumes:
+      - ./posts/index.js:/app/index.js
+
+  query-service:
+    build: ./query
+    image: query-service:udemy-1
+    container_name: query-service-container
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "4002:4002"
+    networks:
+      - app-network
+    volumes:
+      - ./query/index.js:/app/index.js
+
+  event-bus:
+    build: ./event-bus
+    image: event-bus:udemy-1
+    container_name: event-bus-container
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "4005:4005"
+    networks:
+      - app-network
+    volumes:
+      - ./event-bus/index.js:/app/index.js
 
 networks:
   app-network:
