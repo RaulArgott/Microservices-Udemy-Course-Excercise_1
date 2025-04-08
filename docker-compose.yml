@@ -53,6 +53,19 @@ services:
     volumes:
       - ./query/index.js:/app/index.js
 
+  moderation-service:
+    build: ./moderation
+    image: moderation-service:udemy-1
+    container_name: moderation-service-container
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "4003:4003"
+    networks:
+      - app-network
+    volumes:
+      - ./moderation/index.js:/app/index.js
+
   event-bus:
     build: ./event-bus
     image: event-bus:udemy-1
