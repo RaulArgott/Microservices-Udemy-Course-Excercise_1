@@ -1,5 +1,9 @@
 FROM node:22-slim
 
+# Set environment variables
+ENV CI=true
+ENV WDS_SOCKET_PORT=0
+
 # Set working directory
 WORKDIR /app
 

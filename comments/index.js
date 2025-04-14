@@ -22,7 +22,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     comments.push({ id: commentId, content });
     commentsByPostId[req.params.id] = comments;
 
-    await axios.post('http://event-bus:4005/events', {
+    await axios.post('http://event-bus-srv:4005/events', {
         type: 'CommentCreated',
         data: {
             id: commentId,
@@ -35,7 +35,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     res.status(201).send(comments);
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', async (req, res) => {
     console.log('Received event:', req.body.type);
 
     const { type, data } = req.body;
@@ -47,7 +47,7 @@ app.post('/events', (req, res) => {
         comment.status = status;
 
 
-        axios.post('http://event-bus:4005/events', {
+        await axios.post('http://event-bus-srv:4005/events', {
             type: 'CommentUpdated',
             data: {
                 id,

@@ -18,10 +18,10 @@ app.post("/events", async (req, res) => {
 
     console.log(event);
 
-    await axios.post("http://posts-service:4000/events", event).catch(err => console.log(err));
-    await axios.post("http://comments-service:4001/events", event).catch(err => console.log(err));
-    await axios.post("http://query-service:4002/events", event).catch(err => console.log(err));
-    await axios.post("http://moderation-service:4003/events", event).catch(err => console.log(err));
+    await axios.post("http://posts-clusterip-srv:4000/events", event).catch(err => console.log(err));
+    await axios.post("http://comments-clusterip-srv:4001/events", event).catch(err => console.log(err));
+    await axios.post("http://query-clusterip-srv:4002/events", event).catch(err => console.log(err));
+    await axios.post("http://moderation-clusterip-srv:4003/events", event).catch(err => console.log(err));
 
     console.log("Event sent to event-bus");
     res.send({ status: "OK" });
